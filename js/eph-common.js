@@ -1257,10 +1257,9 @@ window.addEventListener('load', function() {
   let lightboxHtml = `
     <div id="eph-lightbox">
       <div class="lightbox-backdrop"></div>
-      <div class="lightbox-content">
-        <a id="lightbox-link" href="#" target="_blank">
-          <img id="lightbox-img" src="" alt="Gambar Diperbesar">
-        </a>
+      <div class="lightbox-content" style="display: flex; flex-direction: column; align-items: center;">
+        <img id="lightbox-img" src="" alt="Gambar Diperbesar" style="max-width: 100%; max-height: 80vh; object-fit: contain;">
+        <a id="lightbox-link" href="#" target="_blank" style="margin-top: 5px; color: #fff; text-decoration: underline; font-size: 14px; background: rgba(0,0,0,0.5); padding: 4px 8px; border-radius: 4px;">Lihat di Wikimedia Commons</a>
       </div>
     </div>
   `;
