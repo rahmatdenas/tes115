@@ -395,8 +395,7 @@ async function populateImageAndWikipediaData() {
   let totalData = daftarQid.length;
   let signal = typeof globalFetchController !== 'undefined' ? globalFetchController.signal : null;
 
-  if (btnImg) btnImg.classList.remove('disabled');
-  if (btnArt) btnArt.classList.remove('disabled');
+
 
   const tarikSatuKloter = async (cicilan) => {
     let kueriFinal = SPARQL_QUERY_3_TEMPLATE.replace('<PLACEHOLDER_QIDS>', cicilan.join(' '));
@@ -437,6 +436,9 @@ async function populateImageAndWikipediaData() {
       
       evaluasiHasilKloter(hasilKloter);
       if (signal && signal.aborted) throw 'ABORTED';
+      // Tombol baru diaktifkan setelah SEMUA data gambar/artikel selesai ditarik
+      if (btnImg) btnImg.classList.remove('disabled');
+      if (btnArt) btnArt.classList.remove('disabled');
 
       Object.values(Records).forEach(r => {
         if (r.id !== currentDisplayedQid) {
@@ -448,6 +450,9 @@ async function populateImageAndWikipediaData() {
       }
 
     } else {
+      // Tombol baru diaktifkan setelah SEMUA data gambar/artikel selesai ditarik
+      if (btnImg) btnImg.classList.remove('disabled');
+      if (btnArt) btnArt.classList.remove('disabled');
       let batchSize = 3; 
       let chunksCompleted = 0;
 
