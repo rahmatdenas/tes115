@@ -631,7 +631,7 @@ height: 16px;
   text-decoration: none;
   color: #a22;
 }
-#details .wikipedia-link a:hover { background: #eee; }
+#details .wikipedia-link a:hover, .lightbox-content a:hover { background: #eee; }
 #details .wikipedia-link a img {
   display: inline-block;
   padding-right: 3px;
