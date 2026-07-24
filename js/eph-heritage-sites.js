@@ -118,21 +118,18 @@ var currentKategoriUtama = 'general';
 var currentNamaKlaster = 'Objek';     
 var currentNamaWilayah = 'Semua Wilayah'; 
 
-function aturTampilanNegara() {
-  let provInput = document.getElementById('provinsi-input').value;
-  let wadahNegara = document.getElementById('wadah-negara');
-  
-  if (provInput === 'luar_negeri') {
-    wadahNegara.style.display = 'block';
-  } else {
-    wadahNegara.style.display = 'none';
-  }
-}
-
 function populateProvinceTypesData() {
   let inputTxt = document.getElementById('jenis-input').value.trim();
+  
+  // +++ KUNCI PERBAIKAN BUG UTAMA: BACA MENU KATEGORI BARU +++
+  let kategoriUtama = document.getElementById('kategori-wilayah-utama').value;
   let provDropdown = document.getElementById('provinsi-input');
-  let provInput = provDropdown.value;
+  let negaraDropdown = document.getElementById('negara-input');
+  
+  // Trik agar sisa kode kueri SPARQL Anda di bawah tidak perlu diubah:
+  // Jika memilih provinsi, ambil nilainya (wd:...). Jika tidak, jadikan nilainya 'all' atau 'luar_negeri'
+  let provInput = (kategoriUtama === 'provinsi') ? provDropdown.value : kategoriUtama; 
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   
   // ==========================================
   // 1. TENTUKAN VARIABEL GLOBAL & WILAYAH DARI HTML
@@ -151,12 +148,15 @@ function populateProvinceTypesData() {
   let propLokasi = opsiTerpilih.getAttribute('data-lokasi') || 'P131';
   let propTahun = opsiTerpilih.getAttribute('data-tahun') || 'P571';
   
-  if (provInput === 'luar_negeri') {
-    let negaraDropdown = document.getElementById('negara-input');
+  // +++ KUNCI PERBAIKAN NAMA JUDUL YANG MUNCUL SAAT LOADING +++
+  if (kategoriUtama === 'luar_negeri') {
     currentNamaWilayah = negaraDropdown.options[negaraDropdown.selectedIndex].text;
+  } else if (kategoriUtama === 'all') {
+    currentNamaWilayah = 'Seluruh Indonesia';
   } else {
     currentNamaWilayah = provDropdown.options[provDropdown.selectedIndex].text;
   }
+  // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   
   // ==========================================
   // 2. PERBARUI TAMPILAN
