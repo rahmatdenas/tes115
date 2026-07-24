@@ -1331,3 +1331,42 @@ window.addEventListener('load', function() {
     }
   });
 });
+
+// Mengatur tampilan dropdown berdasarkan kategori wilayah
+window.aturTampilanWilayah = function() {
+  let jenis = document.getElementById('kategori-wilayah-utama').value;
+  let wadahProvinsi = document.getElementById('wadah-provinsi');
+  let wadahLuarNegeri = document.getElementById('wadah-luar-negeri');
+  
+  if (jenis === 'provinsi') {
+    wadahProvinsi.style.display = 'block';
+    wadahLuarNegeri.style.display = 'none';
+  } else if (jenis === 'luar_negeri') {
+    wadahProvinsi.style.display = 'none';
+    wadahLuarNegeri.style.display = 'block';
+    filterNegaraByBenua(); // Panggil filter agar selaras dengan benua pertama
+  } else {
+    wadahProvinsi.style.display = 'none';
+    wadahLuarNegeri.style.display = 'none';
+  }
+};
+
+// Memfilter daftar negara berdasarkan benua yang dipilih
+window.filterNegaraByBenua = function() {
+  let benua = document.getElementById('benua-input').value;
+  let negaraSelect = document.getElementById('negara-input');
+  let options = negaraSelect.querySelectorAll('option[data-benua]');
+
+  let firstVisible = false;
+  options.forEach(opt => {
+    if (opt.getAttribute('data-benua') === benua) {
+      opt.style.display = ''; // Munculkan
+      if (!firstVisible) {
+        negaraSelect.value = opt.value; // Jadikan default opsi pertama yang muncul
+        firstVisible = true;
+      }
+    } else {
+      opt.style.display = 'none'; // Sembunyikan
+    }
+  });
+};
