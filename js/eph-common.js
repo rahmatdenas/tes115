@@ -353,6 +353,7 @@ function resetApp() {
   // Taruh baris ini di bagian paling bawah fungsi resetApp()
   let subMenuAtas = document.getElementById('submenu-atas');
   if (subMenuAtas) subMenuAtas.style.display = 'none';
+}
 	
 // --- KUNCI PERBAIKAN: RESET SELECT WILAYAH & KATEGORI ---
   let kategoriWilayah = document.getElementById('kategori-wilayah-utama');
