@@ -246,7 +246,7 @@ loadingTimeoutToken = setTimeout(() => {
       if (loadingDesc && isFetching) {
         loadingDesc.innerHTML = `Jika data mencapai ribuan, proses penarikan data membutuhkan waktu 3-7 menit...`;
       }
-    }, 10000); // (10 detik)
+    }, 17000); // (17 detik)
     // =========================================================
 
     loadPrimaryData();
